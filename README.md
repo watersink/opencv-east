@@ -36,7 +36,7 @@ because div operation is not support in opencv，we change it to *0.5
 after that you’ll get you own trained model and the pb suport opencv interface
 
 # run
-  python text_detection.py --image images/lebron_james.jpg --east frozen_east_text_detection.pb
+    python text_detection.py --image images/lebron_james.jpg --east frozen_east_text_detection.pb
 ![image]( ./results/car_wash.png)
 ![image]( ./results/lebron_james.png)
 ![image]( ./results/sign.png)
