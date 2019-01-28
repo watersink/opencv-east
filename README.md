@@ -1,5 +1,5 @@
 # opencv-east
-
+use the opencv interface to run east,the results may have a little difference from tensorflow
 # offical east
 [url](https://github.com/argman/EAST)
 # offical model(.pb)
@@ -7,21 +7,27 @@
 
 # export our ckpt model to pb
 (1)change model.py
+  >
     images = mean_image_subtraction(images)
 to 
+  >
     #images = mean_image_subtraction(images)
 because opencv interface  cv2.dnn.blobFromImage can do this operation
 
 (2)change model.py
+  >
     c1_1 = slim.conv2d(tf.concat([g[i-1], f[i]], axis=-1), num_outputs[i], 1)
 to
+  >
     c1_1 = slim.conv2d(tf.concat([g[i-1], f[i]], axis=3), num_outputs[i], 1)
 because opencv interface only support positive integer
 
 (3)change model.py
+  >
     angle_map = (slim.conv2d(g[3], 1, 1, activation_fn=tf.nn.sigmoid, normalizer_fn=None) - 0.5) * np.pi/2 # angle is between [-45, 45]
     F_geometry = tf.concat([geo_map, angle_map], axis=-1)
 to
+  >
     pi2 = 0.5 * np.pi
     angle_map = (slim.conv2d(g[3], 1, 1, activation_fn=tf.nn.sigmoid, normalizer_fn=None) - 0.5) * pi2 # angle is between [-45, 45]
     F_geometry = tf.concat([geo_map, angle_map], axis=3)
