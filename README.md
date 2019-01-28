@@ -34,11 +34,12 @@ to
 because div operation is not support in opencv，we change it to *0.5
 
 (4)put the code after saver.restore
+  >
     output_graph = "frozen_model.pb"
     output_graph_def = tf.graph_util.convert_variables_to_constants(sess,tf.get_default_graph().as_graph_def(),["feature_fusion/Conv_7/Sigmoid", "feature_fusion/concat_3"])
     with tf.gfile.GFile(output_graph, "wb") as f:
         f.write(output_graph_def.SerializeToString())
-
+  >
 after that you’ll get you own trained model and the pb suport opencv interface
 
 # run
